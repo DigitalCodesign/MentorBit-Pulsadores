@@ -39,11 +39,9 @@
     Constructor, se debe indicar los pines a los que esta conectado el modulo de pulsadores
 */
 
-MentorBitPulsadores::MentorBitPulsadores(uint8_t pin_pulsador1, uint8_t pin_pulsador2){
-    _pin_pulsador1 = pin_pulsador1;
-    _pin_pulsador2 = pin_pulsador2;
-    pinMode(_pin_pulsador1,INPUT);
-    pinMode(_pin_pulsador2,INPUT);
+MentorBitPulsadores::MentorBitPulsadores(uint8_t pin_pulsador1 = 0, uint8_t pin_pulsador2 = 0){
+    _port.gpios[0] = pin_pulsador1;
+    _port.gpios[1] = pin_pulsador2;
 }
 /*
     Funcion que lee el estado digital de cada uno de los pulsadores. Para leer se le debe
@@ -55,10 +53,19 @@ MentorBitPulsadores::MentorBitPulsadores(uint8_t pin_pulsador1, uint8_t pin_puls
 bool MentorBitPulsadores::obtenerLectura(bool pulsador){
     bool value;
     if(pulsador){
-       value = digitalRead(_pin_pulsador1);
+       value = digitalRead(_port.gpios[0]);
     }
     else{
-        value = digitalRead(_pin_pulsador2);
+        value = digitalRead(_port.gpios[1]);
     }
     return value;
+}
+
+void MentorBitPulsadores::configPort(const Port& port) {
+
+    _port.type = port.type;
+    _port.location = port.location;
+    _port.gpios[0] = port.gpios[0];
+    _port.gpios[1] = port.gpios[1];
+
 }

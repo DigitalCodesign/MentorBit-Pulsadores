@@ -37,21 +37,22 @@
 
 // Se incluye las librerias para el uso del modulo de pulsadores
 #include <arduino.h>
+#include <MentorPort.h>
 
-class MentorBitPulsadores
+class MentorBitPulsadores : public MentorPort
 {
     public:
 
         MentorBitPulsadores(uint8_t pin_pulsador1, uint8_t pin_pulsador2);
         bool obtenerLectura(bool pulsador);
+        void configPort(const Port& port) override;
 
         const bool PULSADOR_1 = 1;
         const bool PULSADOR_2 = 0;
 
     private:
 
-        uint8_t _pin_pulsador1;
-        uint8_t _pin_pulsador2;
+        Port _port;
 };
 
 #endif
