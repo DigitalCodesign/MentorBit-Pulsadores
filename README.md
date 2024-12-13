@@ -1,5 +1,7 @@
+
+
 # MentorBit-Pulsadores
-Esta librería está construida por Digital Codesign para utilizar el módulo de Pulsadores, principalmente diseñado para el kit educacional "MentorBit".
+Esta librería está construida por Digital Codesign para utilizar el módulo de pulsadores de MentorBit, principalmente diseñado para el kit educacional "MentorBit".
 
 Puedes encontrar nuestro MentorBit y mucho más material de electrónica y robótica en nuestra tienda oficial:  [https://digitalcodesign.com/shop](https://digitalcodesign.com/shop)
 
@@ -19,23 +21,32 @@ Una vez incluida la librería, usamos el constructor para crear el objeto del m�
 MentorBitPulsadores pulsadores(PIN_PULSADOR_1, PIN_PULSADOR_2);
 ```
 
-Siendo `PIN_PULSADOR_1` y `PIN_PULSADOR_2` los pines donde están conectados los pulsadores del módulo.
+Siendo `PIN_PULSADOR_1` el pin al que está conectado el pulsador 1 y `PIN_PULSADOR_2` el pin al que está conectado el pulsador 2.
 
 ### Uso
 
-Con los pulsadores ya definidos, podemos leer el estado de cada uno de los pulsadores utilizando la función `obtenerLectura()`. El parámetro que se pasa a la función determina cuál de los pulsadores queremos leer.
+Con el objeto `pulsadores` definido, podemos obtener la lectura de cada pulsador utilizando la función `obtenerLectura()`, que devuelve el estado digital de un pulsador:
 
 ```
-bool estado = pulsadores.obtenerLectura(PULSADOR_1);
+bool estadoPulsador1 = pulsadores.obtenerLectura(pulsadores.PULSADOR_1);
+bool estadoPulsador2 = pulsadores.obtenerLectura(pulsadores.PULSADOR_2);
 ```
 
-- Si el valor de `PULSADOR_1` es `true`, se leerá el estado del pulsador 1.
-- Si el valor de `PULSADOR_2` es `false`, se leerá el estado del pulsador 2.
-
-Esta función devuelve un valor booleano (`true` o `false`), dependiendo del estado del pulsador, ya sea presionado o no.
+El valor devuelto es `true` si el pulsador está presionado y `false` si no lo está.
 
 ### Atributos
 
-- `PULSADOR_1`: Selecciona el pulsador 1 para su lectura.
-- `PULSADOR_2`: Selecciona el pulsador 2 para su lectura.
+- `PULSADOR_1`: Define el primer pulsador.
+- `PULSADOR_2`: Define el segundo pulsador.
+
+### Configuración de puertos
+
+Si deseas configurar puertos personalizados, puedes usar la función `configPort()` para asignar los pines y configuraciones de puertos que necesitas:
+
+```
+pulsadores.configPort(port);
+```
+
+Donde `port` es un objeto de tipo `Port` que contiene las configuraciones necesarias.
+
 
