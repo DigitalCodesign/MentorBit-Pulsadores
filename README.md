@@ -1,52 +1,54 @@
+# MentorBitPulsadores
 
+Librería para el uso de módulos de dos pulsadores en placas compatibles con MentorBit.
 
-# MentorBit-Pulsadores
-Esta librería está construida por Digital Codesign para utilizar el módulo de pulsadores de MentorBit, principalmente diseñado para el kit educacional "MentorBit".
+## Descripción
 
-Puedes encontrar nuestro MentorBit y mucho más material de electrónica y robótica en nuestra tienda oficial:  [https://digitalcodesign.com/shop](https://digitalcodesign.com/shop)
+La librería `MentorBitPulsadores` facilita la lectura de dos pulsadores conectados a pines digitales en módulos compatibles con MentorBit. Permite obtener el estado de cada pulsador individualmente.
 
-# Modo de empleo
+## Modo de Empleo
 
-Una vez tengamos la librería instalada desde el Arduino IDE, tenemos que incluir la librería con la siguiente línea:
+1.  **Instalación:**
+    * Abre el IDE compatible con MentorBit.
+    * Ve a "Herramientas" -> "Gestionar librerías..."
+    * Busca "MentorBitPulsadores" e instálala.
 
-```
-#include <MentorBitPulsadores.h>
-```
+2.  **Ejemplo básico:**
+
+    ```c++
+    #include <MentorBitPulsadores.h>
+
+    MentorBitPulsadores pulsadores(2, 3); // Pulsador 1 en pin 2, pulsador 2 en pin 3
+
+    void setup() {
+      Serial.begin(9600);
+      Serial.println("Módulo de pulsadores inicializado.");
+    }
+
+    void loop() {
+      if (pulsadores.obtenerLectura(pulsadores.PULSADOR_1)) {
+        Serial.println("Pulsador 1 presionado");
+      }
+      if (pulsadores.obtenerLectura(pulsadores.PULSADOR_2)) {
+        Serial.println("Pulsador 2 presionado");
+      }
+      delay(100);
+    }
+    ```
+
+## Constructor y Métodos Públicos
 
 ### Constructor
 
-Una vez incluida la librería, usamos el constructor para crear el objeto del módulo de pulsadores, y definimos los pines a los que están conectados los pulsadores:
+* `MentorBitPulsadores(uint8_t pin_pulsador1, uint8_t pin_pulsador2)`: Crea un objeto `MentorBitPulsadores`.
+    * `pin_pulsador1`: Pin digital al que está conectado el primer pulsador.
+    * `pin_pulsador2`: Pin digital al que está conectado el segundo pulsador.
 
-```
-MentorBitPulsadores pulsadores(PIN_PULSADOR_1, PIN_PULSADOR_2);
-```
+### Métodos
 
-Siendo `PIN_PULSADOR_1` el pin al que está conectado el pulsador 1 y `PIN_PULSADOR_2` el pin al que está conectado el pulsador 2.
+* `bool obtenerLectura(bool pulsador)`: Obtiene el estado de un pulsador.
+    * `pulsador`: `PULSADOR_1` para leer el primer pulsador, `PULSADOR_2` para leer el segundo pulsador.
 
-### Uso
+## Constantes Públicas
 
-Con el objeto `pulsadores` definido, podemos obtener la lectura de cada pulsador utilizando la función `obtenerLectura()`, que devuelve el estado digital de un pulsador:
-
-```
-bool estadoPulsador1 = pulsadores.obtenerLectura(pulsadores.PULSADOR_1);
-bool estadoPulsador2 = pulsadores.obtenerLectura(pulsadores.PULSADOR_2);
-```
-
-El valor devuelto es `true` si el pulsador está presionado y `false` si no lo está.
-
-### Atributos
-
-- `PULSADOR_1`: Define el primer pulsador.
-- `PULSADOR_2`: Define el segundo pulsador.
-
-### Configuración de puertos
-
-Si deseas configurar puertos personalizados, puedes usar la función `configPort()` para asignar los pines y configuraciones de puertos que necesitas:
-
-```
-pulsadores.configPort(port);
-```
-
-Donde `port` es un objeto de tipo `Port` que contiene las configuraciones necesarias.
-
-
+* `PULSADOR_1`, `PULSADOR_2`: Constantes para seleccionar el pulsador a leer.
