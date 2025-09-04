@@ -41,12 +41,12 @@ void setup(){
 }
 
 void loop(){
-    if(!modulo_pulsadores.obtenerLectura(modulo_pulsadores.PULSADOR_1)){
+    if(modulo_pulsadores.obtenerLectura(modulo_pulsadores.PULSADOR_1)){
         Serial.println("Se ha pulsado el pulsador 1");
-        while(!modulo_pulsadores.obtenerLectura(modulo_pulsadores.PULSADOR_1));
+        while(modulo_pulsadores.obtenerLectura(modulo_pulsadores.PULSADOR_1));
     }
-    if(!modulo_pulsadores.obtenerLectura(modulo_pulsadores.PULSADOR_2)){
+    if(modulo_pulsadores.obtenerLectura(modulo_pulsadores.PULSADOR_2)){
         Serial.println("Se ha pulsado el pulsador 2");
-        while(!modulo_pulsadores.obtenerLectura(modulo_pulsadores.PULSADOR_2));
+        while(modulo_pulsadores.obtenerLectura(modulo_pulsadores.PULSADOR_2));
     }
 }
